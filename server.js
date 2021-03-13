@@ -9,7 +9,7 @@ const peerServer = ExpressPeerServer(server,{
     debug:true
 })
 
-
+const port = process.env.port||3030;
 app.set("view engine","ejs");
 const publicPath=path.join(__dirname,'/../public')
 app.use(express.static('public'))
@@ -56,4 +56,4 @@ io.on('connection',(socket)=>{
 //     })
 // })
 
-server.listen(3030)
+server.listen(port)
