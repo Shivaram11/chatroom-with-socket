@@ -1,10 +1,35 @@
 const socket = io("");
 socket.on('connect',()=>{
+    socket.emit('createMessage',{
+        from:"shiva",
+        text:"hey now brown cow"
+    })
     console.log("some one connected")
 })
 socket.on('disconnect', () => {
     console.log("disconnected")
 })
+socket.on('newMessage', (message) => {
+    console.log("new message",message)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//old code
+
 
 // var peer = new Peer(undefined,{
 //     path:'/peerjs',

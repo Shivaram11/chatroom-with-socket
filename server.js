@@ -16,6 +16,33 @@ app.use(express.static('public'))
 //new one
 io.on('connection',(socket)=>{
     console.log("user connected")
+    socket.emit('newMessage',{
+        from:"admin",
+        text:"welcome to the chat",
+        createdAt:new Date().toTimeString()
+    })
+    socket.broadcast.emit('newMessage', {
+        from: "admin",
+        text: "new user joined",
+        time: new Date().toTimeString()
+    })
+    socket.on("createMessage",(message)=>{
+        console.log("create message",message)
+        io.emit('newMessage',{
+            from:message.from,
+            text: message.text,
+            time: new Date().toTimeString()
+        })
+        // socket.broadcast.emit('newMessage', {
+        //     from: message.from,
+        //     text: message.text,
+        //     time: new Date().toTimeString()
+        // })
+    })
+    socket.emit('newMessage',{
+        from: "shiva's server",
+        text: "hey cow brown cow"
+    })
     socket.on('disconnect', () => {
         console.log("user was disconnected")
     })
